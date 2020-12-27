@@ -1,0 +1,70 @@
+#include <AFMotor.h>
+AF_DCMotor m1(1);
+AF_DCMotor m2(2);
+AF_DCMotor m3(3);
+
+#define slow 64
+#define normal 128
+#define fast 255
+
+void Forward(void){
+  m1.setSpeed(normal);
+  m2.setSpeed(normal);
+  m3.setSpeed(slow);
+  m1.run(FORWARD);
+  m2.run(FORWARD);
+
+}
+
+void fast_Forward(void){
+  m1.setSpeed(fast);
+  m2.setSpeed(fast);
+  m3.setSpeed(slow);
+  m1.run(FORWARD);
+  m2.run(FORWARD);
+
+}
+
+void Backward(void){
+  m1.setSpeed(normal);
+  m2.setSpeed(normal);
+  m3.setSpeed(0);
+  m1.run(BACKWARD);
+  m2.run(BACKWARD);
+
+}
+
+void Rotate_right(void){
+  m1.setSpeed(normal);
+  m2.setSpeed(normal);
+  m3.setSpeed(normal);
+  m1.run(FORWARD);
+  m2.run(BACKWARD);
+  m3.run(FORWARD);
+}
+
+void Rotate_left(void){
+  m1.setSpeed(normal);
+  m2.setSpeed(normal);
+  m3.setSpeed(normal);
+  m1.run(BACKWARD);
+  m2.run(FORWARD);
+  m3.run(BACKWARD);
+}
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop(){
+  printf("Systems ON");
+  Forward();
+  delay(1000);
+  Rotate_left();
+  delay(1000);
+  Backward();
+  delay(1000);
+  Rotate_right();
+  delay(1000);
+  
+}
